@@ -1,7 +1,7 @@
 import pg from "pg";
 const { Pool } = pg;
 
-const { DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_DATABASE } = process.env;
+const { DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_NAME } = process.env;
 
 const config = {
   host: DB_HOST,
