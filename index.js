@@ -1,13 +1,25 @@
 import express from "express";
-import { fileUpload } from "express-fileupload";
-import handlebars from "express-handlebars";
+import expressFileUpload from "express-fileupload";
+import { engine } from "express-handlebars";
+import router from "./routes/router.js";
 
 const app = express();
+const PORT = process.env.PORT || 3000;
 
+//middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(fileUpload());
+app.use(express.static("public"));
 
-app.engine("handlebars", handlebars({ extname: ".hbs" }));
-app.set("view engine", "handlebars");
+app.use(expressFileUpload());
+
+app.engine("handlebars", engine({ extname: ".hbs" }));
+app.set("views", "./views");
+
+//routes
+app.use("/", router);
+
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
+});
